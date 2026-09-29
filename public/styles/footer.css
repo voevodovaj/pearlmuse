@@ -1,0 +1,208 @@
+.footer {
+    background-color: #f3f1ec;
+    border-top: 1px solid #e8e2d8;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    /* justify-content: space-between; */
+    padding: 20px 60px;
+    margin-top: 80px;
+    position: relative;
+}
+
+.footer-col {
+    flex: 1;
+}
+
+.footer-col-accordion {
+    flex: 1;
+}
+
+
+.footer-col-logo,
+.footer-col-logo img {
+    width: 150px;
+    height: auto;
+    padding-bottom: 10px;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-link {
+    color: #2e2b28;
+    transition: color 0.3s ease;
+}
+
+.icon-link:hover {
+    color: #a8844d;
+}
+
+.icon-link:focus-visible {
+    color: #2e2b28;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+}
+
+.footer-navigation ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.footer-navigation a {
+    color: #2e2b28;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-navigation a:hover {
+    color: #a8844d;
+}
+
+.footer-navigation a:focus-visible {
+    color: #2e2b28;
+}
+
+.footer-col-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 220px;
+}
+
+.footer-col-title {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-col-title-last {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-arrow {
+    display: none;
+}
+
+.footer-toggle {
+    display: none;
+}
+
+.footer-col-text a {
+    text-decoration: none;
+    color: #2e2b28;
+    transition: color 0.3s ease;
+}
+
+.footer-col-text a:hover {
+    color: #a8844d;
+}
+
+@media (max-width: 1024px) {
+    .footer {
+        padding: 20px;
+    }
+
+    .footer-col-logo,
+    .footer-col-logo img {
+        width: 130px;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 0;
+    }
+
+    .footer-col {
+        width: 100%;
+    }
+
+    .footer-col-accordion {
+        width: 100%;
+    }
+
+    .footer-col-logo,
+    .footer-col-logo img {
+        display: none;
+    }
+
+    .footer-col-text {
+        max-width: 100%;
+    }
+
+    .footer-col-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        margin: 0;
+        padding: 18px 0;
+
+        border-bottom: 1px solid #e8e2d8;
+    }
+
+
+    footer-col-title-last {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        margin: 0;
+        padding: 18px 0;
+    }
+
+    /* показываем плюс только на мобильном */
+    .footer-arrow {
+        display: block;
+        font-size: 22px;
+        transition: transform 0.3s ease;
+    }
+
+
+    /* скрываем содержимое аккордеона */
+    .footer-col-accordion .footer-col-text,
+    .footer-col-accordion .footer-navigation {
+        display: none;
+        padding: 15px 0;
+    }
+
+
+    /* открываем блок */
+    .footer-toggle:checked~.footer-col-text,
+    .footer-toggle:checked~.footer-navigation {
+        display: block;
+    }
+
+
+    /* меняем плюс на крест */
+    .footer-toggle:checked+.footer-col-title .footer-arrow {
+        transform: rotate(45deg);
+    }
+
+    /* меняем плюс на крест */
+    .footer-toggle:checked+.footer-col-title {
+        border-bottom: none;
+    }
+
+
+    /* FOLLOW US остается открытым */
+    .footer-col:last-child {
+        padding-top: 20px;
+    }
+
+}
