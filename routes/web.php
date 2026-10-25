@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controllers\BaseController::class, 'getIndex']);
@@ -16,3 +18,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('catalog', [CatalogController::class, 'getIndex'])->name('catalog.index');
+Route::get('catalog/{catalog}', [CatalogController::class, 'getOne'])->name('catalog.one');
+Route::get('product/{product}', [ProductController::class, 'getIndex'])->name('product.index');

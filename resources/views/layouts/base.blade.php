@@ -9,22 +9,23 @@
     <meta name="description"
         content="Discover exclusive baroque pearl jewelry for modern women and brides. Handmade statement necklaces, earrings, and timeless pearl pieces with worldwide shipping.">
     <meta name="theme-color" content="#faf9f6">
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="favicon.ico">
-    <link rel='stylesheet' type="text/css" href="styles/style.css">
-    <link rel='stylesheet' type="text/css" href="styles/header.css">
-    <link rel='stylesheet' type="text/css" href="styles/footer.css">
-    <link rel='stylesheet' type="text/css" href="styles/hero.css">
-    <link rel='stylesheet' type="text/css" href="styles/categories.css">
-    <link rel='stylesheet' type="text/css" href="styles/about.css">
-    <link rel='stylesheet' type="text/css" href="styles/collections.css">
-    <link rel="stylesheet" type="text/css" href="styles/product-slider.css">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/style.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/header.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/footer.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/hero.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/categories.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/about.css') }}">
+    <link rel='stylesheet' type="text/css" href="{{ asset('styles/collections.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/product-slider.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
 </head>
+
 <header class="header">
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
     <label for="menu-toggle" class="burger" aria-label="Open menu">
@@ -33,7 +34,7 @@
         <span></span>
     </label>
     <a href="/" class="logo">
-        <img src="assets/images/logo-horizontal.webp" alt="Pearl Muse Jewelry">
+        <img src="{{ asset('assets/images/logo-horizontal.webp') }}" alt="Pearl Muse Jewelry">
     </a>
     <nav class="navigation">
         <ul>
@@ -51,13 +52,63 @@
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
         </a>
-        <a href="#" class="icon-link" aria-label="Log in">
+
+
+        @if(auth()->guest())
+        <button type="button" class="icon-link" id="open-auth" aria-label="Log in">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 28 28" stroke-width="1.5"
                 stroke="currentColor" class="icon">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
-        </a>
+        </button>
+        <div id="auth-modal"
+            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Авторизация">
+
+            <div class="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+
+                <button type="button"
+                    id="close-auth"
+                    class="absolute right-4 top-3 text-2xl"
+                    aria-label="Закрыть">
+                    &times;
+                </button>
+
+                <div id="login-form-container">
+                    @include('auth.partials.login-form')
+                </div>
+
+                <div id="register-form-container" class="hidden">
+                    @include('auth.partials.register-form')
+                </div>
+
+            </div>
+        </div>
+        @else
+        <div>
+            <a href="/dashboard" class="text-sm font-bold uppercase tracking-[0.08em] text-stone-500 transition-colors duration-200 hover:text-stone-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
+                {{auth()->user()->name}}
+            </a>
+        </div>
+        <div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-dropdown-link>
+            </form>
+        </div>
+        @endif
+
+
+
+
         <a href="#" class="icon-link" aria-label="Basket">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 28 28" stroke-width="1.5"
                 stroke="currentColor" class="icon">
@@ -68,14 +119,16 @@
     </div>
 </header>
 
+
+
 <main>
-   @yield('content')
+    @yield('content')
 </main>
 
 <footer class="footer">
     <div class="footer-col">
         <a href="/" class="footer-col-logo">
-            <img src="assets/images/logo-horizontal.webp" alt="Pearl Muse Jewelry">
+            <img src="{{ asset('assets/images/logo-horizontal.webp') }}" alt="Pearl Muse Jewelry">
         </a>
     </div>
 
