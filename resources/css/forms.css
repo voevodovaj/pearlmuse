@@ -1,0 +1,19 @@
+@layer components {
+    .form-input {
+        @apply block w-full rounded-md border border-gray-300 px-3 py-2;
+    }
+
+    .form-input:hover {
+        border-color: #2e2b28;
+    }
+
+    .form-input:focus,
+    .form-input:focus-visible {
+        border-color: #2e2b28 !important;
+        outline: 1px solid #2e2b28 !important;
+        outline-offset: 0;
+        box-shadow: none !important;
+        --tw-ring-color: #2e2b28 !important;
+        --tw-ring-shadow: 0 0 #0000 !important;
+    }
+}
