@@ -20,4 +20,9 @@ public $fillable=['name', 'picture', 'price', 'name', 'description', 'small_desc
     {
         return $this->belongsTo(User::class);
     }
+
+      public function prices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
 }

@@ -38,7 +38,7 @@
     </a>
     <nav class="navigation">
         <ul>
-            <li><a href="#">CATALOG</a></li>
+            <li><a href="/catalog">CATALOG</a></li>
             <li><a href="#">ABOUT</a></li>
             <li><a href="pages/contacts.html">CONTACTS</a></li>
         </ul>
@@ -153,7 +153,7 @@
 
         <nav class="footer-navigation">
             <ul>
-                <li><a href="#" class="footer-col-link">Catalog</a></li>
+                <li><a href="/catalog" class="footer-col-link">Catalog</a></li>
                 <li><a href="#" class="footer-col-link">About</a></li>
                 <li><a href="pages/contacts.html" class="footer-col-link">Contacts</a></li>
             </ul>
