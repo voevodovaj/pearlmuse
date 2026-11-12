@@ -28,6 +28,7 @@ Route::get('product/{product}', [ProductController::class, 'getIndex'])->name('p
 Route::get('product/{product}/add_to_basket', [BasketController::class, 'getAddToBasket']);
 Route::get('basket', [BasketController::class, 'getBasket']);
 Route::get('product_cookie_del/{product}', [BasketController::class, 'getDelCookie']);
+Route::post('order', [Controllers\OrderController::class, 'postIndex']);
 
 
 

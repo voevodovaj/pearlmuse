@@ -20,6 +20,10 @@ main {
     flex: 1;
 }
 
+.main-content {
+    padding-top: 50px;
+}
+
 .wrapper {
     max-width: 1400px;
     margin: 0 auto;
@@ -31,6 +35,49 @@ h2,
 h3 {
     font-family: "Playfair Display", serif;
     font-weight: 400;
+}
+
+.catalog-main-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: #2e2b28;
+    color: #faf9f6;
+    border: none;
+    border-radius: 4px;
+    margin: 20px 0 40px 0;
+    cursor: pointer;
+    /* transition: background-color 0.3s ease, transform 0.3s ease; */
+}
+
+.catalog-main-button-icon:hover {
+    background-color: #a8844d;
+    /* transform: scale(1.1); */
+}
+
+.catalog-card-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background-color: #faf9f6;
+    color: #2e2b28;
+    border: 1px solid #2e2b28;
+    border-radius: 4px;
+    margin: 20px 0 40px 0;
+    cursor: pointer;
+    /* transition: background-color 0.3s ease, transform 0.3s ease; */
+}
+
+.catalog-card-button-icon:hover {
+    background-color: #a8844d;
+    color: #faf9f6;
+    border: 1px solid #a8844d;
+    /* transform: scale(1.1); */
+
 }
 
 @media (max-width: 1024px) {

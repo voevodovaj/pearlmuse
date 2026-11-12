@@ -1,48 +1,55 @@
 @extends('layouts.base')
 @section('content')
 
-<nav class="flex mb-5" aria-label="Breadcrumb">
-  <ol class="inline-flex items-center space-x-1 md:space-x-2">
-
-    {{-- Каталог --}}
-    <li class="inline-flex items-center">
-      <a href="/catalog" class="text-gray-700 hover:text-gray-900 inline-flex items-center">
-        <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-          </path>
-        </svg>
-        Каталог
-      </a>
-    </li>
-
-    {{-- Категория --}}
-    <li>
-      <div class="flex items-center">
-        <span class="text-gray-400 mx-1">›</span>
-        <a href="{{ url('/catalog/' . $catalog->id) }}"
-          class="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium">
-          {{ $catalog->name }}
+<div class="wrapper">
+  <nav class="flex mb-5" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2">
+      {{-- Главная --}}
+      <li class="inline-flex items-center">
+        <a href="/" class="text-gray-700 hover:text-gray-900 text-sm font-medium">
+          Home
         </a>
-      </div>
-    </li>
+      </li>
 
-    {{-- Товар --}}
-    <li>
-      <div class="flex items-center">
+      <li>
         <span class="text-gray-400 mx-1">›</span>
-        <span class="text-gray-500 ml-1 md:ml-2 text-sm font-medium">
-          {{ $product->name }}
-        </span>
-      </div>
-    </li>
+      </li>
+      {{-- Каталог --}}
+      <li class="inline-flex items-center">
+        <a href="/catalog" class="text-gray-700 hover:text-gray-900 text-sm font-medium">
 
-  </ol>
-</nav>
+          Catalog
+        </a>
+      </li>
+
+      {{-- Категория --}}
+      <li>
+        <div class="flex items-center">
+          <span class="text-gray-400 mx-1">›</span>
+          <a href="{{ url('/catalog/' . $catalog->id) }}"
+            class="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium">
+            {{ $catalog->name }}
+          </a>
+        </div>
+      </li>
+
+      {{-- Товар --}}
+      <li>
+        <div class="flex items-center">
+          <span class="text-gray-400 mx-1">›</span>
+          <span class="text-gray-500 ml-1 md:ml-2 text-sm font-medium">
+            {{ $product->name }}
+          </span>
+        </div>
+      </li>
+
+    </ol>
+  </nav>
+</div>
 
 
 <div>
-  <div class="container mx-auto px-4 py-8">
+  <div class="wrapper py-8">
     <div class="flex flex-wrap -mx-4">
 
       <!-- Product Image -->
@@ -54,30 +61,32 @@
       </div>
 
       <!-- Product Details -->
-      <form action="{{asset('product/'.$product->id.'/add_to_basket')}}">
-        @csrf
-        <input type="hidden" name="product_id" value="{{$product->id}}" />
-        <div class="w-full md:w-1/2 px-4">
 
-          <h2 class="text-3xl font-bold mb-2">
+      <div class="w-full md:w-1/2 px-4">
+        <form action="{{asset('product/'.$product->id.'/add_to_basket')}}">
+          @csrf
+          <input type="hidden" name="product_id" value="{{$product->id}}" />
+          @if(!$product->prices()->exists())
+          <input type="hidden" name="price" value="0">
+          @endif
+          <h2 class="text-3xl font-bold mb-6">
             {{ $product->name }}
           </h2>
 
-          @if(!$product->prices()->exists())
-          <input type="hidden" name="price" value="0" />
           <div class="mb-4">
-            <span class="text-2xl font-bold mr-2">
+            <span id="product-price" class="text-2xl font-bold mr-2">
+              @if(!$product->prices()->exists())
               ${{ $product->price }}
+              @endif
             </span>
           </div>
-          @endif
 
           <p class="text-gray-700 mb-6">
             {{ $product->small_description }}
           </p>
           @if($product->prices)
           <div class="mb-6">
-            <h3 class="text-lg font-semibold mb-2">Type:</h3>
+            <h3 class="text-lg font-semibold mb-2">Size:</h3>
 
             <div class="flex space-x-2">
               @foreach($product->prices as $price)
@@ -86,9 +95,9 @@
 
 
               <div>
-                <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 my-3  hover:bg-indigo-300 cursor-pointer ">
-                  <input type="radio" required name="price" value="{{$price->id}}">
-                  <i class="pl-2">{{$price->price}} {{$price->type_description}}</i>
+                <label class="flex text-gray-700 rounded-md px-3 py-2 my-3  hover:bg-indigo-300 cursor-pointer ">
+                  <input type="radio" required name="price" value="{{$price->id}}" data-price="{{$price->price}}" @if($loop->first) checked @endif>
+                  <i class="pl-2">{{$price->type_description}}</i>
                 </label>
 
 
@@ -118,7 +127,7 @@
 
           <div class="flex space-x-4 mb-6">
 
-            <button type=submit class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <button type=submit class="catalog-main-button-icon">
 
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -130,7 +139,7 @@
             </button>
 
             <button
-              class="bg-gray-200 flex gap-2 items-center text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              class="catalog-card-button-icon">
 
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -148,11 +157,63 @@
             {!! $product->description !!}
           </div>
 
-        </div>
+      </div>
       </form>
     </div>
   </div>
 </div>
+@push('scripts')
+<script>
+  const radios = document.querySelectorAll('input[name="price"][type="radio"]');
 
+  if (radios.length) {
+    const storageKey = 'selected-price-{{ $product->id }}';
+    const saved = sessionStorage.getItem(storageKey);
+
+    // Проверяем, сохранён ли предыдущий выбор
+    if (saved) {
+      try {
+        const selection = JSON.parse(saved);
+        const isValid = Date.now() - selection.savedAt < 30 * 60 * 1000;
+
+        const savedRadio = Array.from(radios).find(
+          radio => radio.value === selection.priceId
+        );
+
+        if (isValid && savedRadio) {
+          savedRadio.checked = true;
+        } else {
+          sessionStorage.removeItem(storageKey);
+        }
+      } catch {
+        sessionStorage.removeItem(storageKey);
+      }
+    }
+
+    // Обновляем отображаемую цену
+    const updatePrice = radio => {
+      document.getElementById('product-price').textContent = '$' + radio.dataset.price;
+    };
+
+    const selectedRadio = document.querySelector('input[name="price"]:checked');
+
+    if (selectedRadio) {
+      updatePrice(selectedRadio);
+    }
+
+    // Сохраняем выбор при переключении
+    radios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        sessionStorage.setItem(storageKey, JSON.stringify({
+          priceId: this.value,
+          savedAt: Date.now()
+        }));
+
+        updatePrice(this);
+      });
+    });
+  }
+</script>
+@endpush
 
 @endsection

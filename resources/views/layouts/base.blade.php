@@ -121,7 +121,7 @@
 
 
 
-<main>
+<main class="main-content">
     @yield('content')
 </main>
 
@@ -199,7 +199,7 @@
 </footer>
 
 <body>
-
+@stack('scripts')
 </body>
 
 </html>

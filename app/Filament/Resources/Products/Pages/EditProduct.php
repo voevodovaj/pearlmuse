@@ -27,7 +27,4 @@ class EditProduct extends EditRecord
         ];
     }
 
-    
-
-
 }
