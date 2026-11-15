@@ -29,6 +29,8 @@ Route::get('product/{product}/add_to_basket', [BasketController::class, 'getAddT
 Route::get('basket', [BasketController::class, 'getBasket']);
 Route::get('product_cookie_del/{product}', [BasketController::class, 'getDelCookie']);
 Route::post('order', [Controllers\OrderController::class, 'postIndex']);
+//всегда последний маршрут
+Route::get('{url}', [Controllers\MaintextController::class, 'getIndex']);
 
 
 

@@ -82,6 +82,27 @@
     height: auto;
 }
 
+.basket-link {
+    position: relative;
+}
+
+.basket-count {
+    position: absolute;
+    top: -5px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #a8844d;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+}
+
 @media (max-width: 1024px) {
 .header {
     padding: 20px 20px;

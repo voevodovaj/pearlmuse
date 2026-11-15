@@ -39,6 +39,6 @@ class OrderController extends Controller
                 setcookie($key, '', time() - 1, '/');
             }
         }
-        return redirect('/');
+        return redirect('/order_success');
     }
 }
